@@ -1,0 +1,45 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+
+#---- Configuration variables ----
+GUI               = false # Enable/Disable GUI
+RAM               = 128   # Default memory size in MB
+
+# Network configuration
+DOMAIN            = ".nat.example.com"
+NETWORK           = "192.168.50."
+NETMASK           = "255.255.255.0"
+
+# Default Virtualbox .box
+#BOX               = 'centos/7'
+BOX               = 'ubuntu/bionic64'
+
+
+HOSTS = {
+   "proxy" => [NETWORK+"1", RAM, GUI, BOX],
+   "web1" => [NETWORK+"11", RAM, GUI, BOX],
+   "db" => [NETWORK+"20", RAM, GUI, BOX],
+}
+
+
+Vagrant.configure("2") do |config|
+	HOSTS.each do | (name, cfg) |
+		ipaddr, ram, gui, box = cfg
+
+		config.vm.define name do |machine|
+			machine.vm.box   = box
+
+			machine.vm.provider "virtualbox" do |vbox|
+				vbox.gui    = gui
+				vbox.memory = ram
+				vbox.name = name
+			end
+
+			machine.vm.hostname = name + DOMAIN
+			machine.vm.network 'private_network', ip: ipaddr, netmask: NETMASK
+		end
+	end
+	#proxy.vm.network "forwarded_port", guest: 8291, host: 8291, host_ip: "127.0.0.1"
+end
+
