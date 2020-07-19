@@ -1,43 +1,24 @@
 # vagrant101
 
-## lab01 simple VM (Ubuntu)
-Un simple despliegue de una Maquina Virtual con Ubuntu 16.04
-
-El nombre de la imagena a desplegar es minimal/xenial64
-La configuracion por defecto de esta imagen es :
-* Una placa de red en modo *nat* y con salida a Internet por el equipo HOST
-* Usuario *vagrant* con clave *vagrant* con privilegios de sudo sin clave
-* Llaves ssh para el usuario vagrant sin clave
-* Directorio local ($PWD) montando en la VM en el directorio /vagrant
-* Reenvio del puerto tcp/2222 del HOST al puerto tcp/22 de la VM
+## lab04 Varias VM (Ubuntu)
+Laboratorio de 3 VM definidas en un array y desplegadas usando un bucle
 
 Mas imagenes en https://app.vagrantup.com/boxes/search
 
-Inicializamos/creamos el archivo Vagrantfile 
+
+Iniciamos el despliegue
 ```
-$ vagrant init -f minimal/xenial64
+$ wget https://raw.githubusercontent.com/pvrmza/vagrant101/master/lab04_vm_bucle/Vagrantfile
+$ vagrant up
 ```
 
-Levantamos la instancia y revisamos el estado
+Revisamos el estado de cada equipo
 ```
-$ vagrant up
 $ vagrant status
 ```
 
-Ingresamos por ssh con el uarui
+Ingresamos por ssh al router Mikrotik
 ```
-$ vagrant ssh --
-```
-
-Algunos otros comandos utiles
-```
-$ vagrant halt
-$ vagrant suspend
-$ vagrant resume
-```
-
-Para borrar/destruir la Maqina Virtual
-```
-$ vagrant destroy
+$ vagrant ssh r1
 ```
 

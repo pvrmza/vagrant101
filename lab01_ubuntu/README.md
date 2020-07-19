@@ -24,7 +24,7 @@ $ vagrant up
 $ vagrant status
 ```
 
-Ingresamos por ssh con el uarui
+Ingresamos por ssh con el usuario
 ```
 $ vagrant ssh --
 ```
