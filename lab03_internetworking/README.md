@@ -26,6 +26,7 @@ La configuracion del laboratorio :
 Iniciamos el despliegue
 ```
 $ wget https://raw.githubusercontent.com/pvrmza/vagrant101/master/lab03_internetworking/Vagrantfile
+$ wget https://raw.githubusercontent.com/pvrmza/vagrant101/master/lab03_internetworking/custom_script.rsc
 $ vagrant up
 ```
 
